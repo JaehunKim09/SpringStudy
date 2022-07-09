@@ -3,7 +3,7 @@ package git1;
 public class main {
 
 	public static void main(String[] args) {
-		//ÀÌ°Ç Å×½ºÆ®ÀÔ´Ï´Ù.
+		//í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤.
 		System.out.println("this is test");
 
 	}
