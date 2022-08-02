@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="book">
+<!-- 도서목록 추가 sql -->
 <insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="book_id">  
     <![CDATA[
     insert into book
@@ -9,17 +10,29 @@
     (#{title}, #{category}, #{price})
     ]]>
 </insert>
-
+<!-- 도서목록 확인sql -->
 <select id="select_detail" parameterType="hashMap" resultType="hashMap">
 	<![CDATA[
 		select title, category, price, insert_date from book where book_id = #{bookId}
 	]]>
 </select>
+<!-- 도서목록 수정 sql -->
 <update id="update" parameterType="hashMap">
 	<![CDATA[
 		update book set title = #{title}, category = #{category}, price = #{price} where book_id = #{bookId}
 	]]>
 </update>
+<!-- 도서목록 삭제 sql -->
+<delete id="delete" parameterType="hashMap">
+	<![CDATA[
+	delete from book where book_id=#{bookId}
+	]]>
+</delete>
+<select id="select_list" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+	select book_id, title, category, price, insert_date from book order by insert_date desc
+	]]>
+</select>
 </mapper>
 		
 		

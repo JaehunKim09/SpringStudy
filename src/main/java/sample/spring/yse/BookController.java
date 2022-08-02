@@ -1,5 +1,6 @@
 package sample.spring.yse;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,34 @@ public ModelAndView updatePost(@RequestParam Map<String, Object> map) {
 	boolean inUpdateSuccess = this.bookService.edit(map);
 	if(inUpdateSuccess) {
 		String bookId = map.get("bookId").toString();
-		mav.setViewName("redirext:/detail?bookId="+ bookId);	
+		mav.setViewName("redirect:/detail?bookId="+ bookId);	
 	}else {
 		mav = this.update(map);
 	}
+	return mav;
+	}
+@RequestMapping(value = "/delete", method = RequestMethod.POST)
+public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
+	ModelAndView mav = new ModelAndView();
+	
+	boolean isDeleteSuccess = this.bookService.remove(map);
+	if(isDeleteSuccess) {
+		mav.setViewName("redirect:/list");
+	}else {
+		String bookId = map.get("bookId").toString();
+		mav.setViewName("redirect:/detail?bookId=" + bookId);
+	}
+	return mav;
+	}
+
+@RequestMapping(value="list")
+public ModelAndView list(@RequestParam Map<String, Object> map) {
+	
+	List<Map<String, Object>> list = this.bookService.list(map);;
+	
+	ModelAndView mav = new ModelAndView();
+	mav.addObject("data", list);
+	mav.setViewName("/book/list");
 	return mav;
 }
 }
