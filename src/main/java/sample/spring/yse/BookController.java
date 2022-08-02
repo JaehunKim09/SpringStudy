@@ -18,6 +18,7 @@ public class BookController {
 public ModelAndView create() {
 	return new ModelAndView("book/create");
 }
+
 @RequestMapping(value = "/create", method=RequestMethod.POST)
 public ModelAndView createPost(@RequestParam Map<String,Object> map) {
 	ModelAndView mav = new ModelAndView();
@@ -30,4 +31,16 @@ public ModelAndView createPost(@RequestParam Map<String,Object> map) {
 	}
 	return mav;
 }
+@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public ModelAndView detail(@RequestParam Map<String, Object> map) {
+	Map<String, Object> detailMap = this.bookService.detail(map);
+	
+	ModelAndView mav = new ModelAndView();
+	mav.addObject("data",detailMap);
+	String bookId = map.get("bookId").toString();
+	mav.addObject("bookId", bookId);
+	mav.setViewName("/book/detail");
+	
+	return mav;
+	}
 }

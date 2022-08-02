@@ -19,5 +19,11 @@ public String create(Map<String, Object> map) {
 	}
 	return null;
 }
+	
+	@Override
+	public Map<String, Object> detail(Map<String, Object> map){
+		return this.bookDao.selectDetail(map);
+		
+	}
 
 }
