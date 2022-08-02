@@ -25,5 +25,12 @@ public String create(Map<String, Object> map) {
 		return this.bookDao.selectDetail(map);
 		
 	}
+	
+	@Override
+	public boolean edit(Map<String, Object> map) {
+		int affectRowCount = this.bookDao.update(map);
+		return affectRowCount == 1;
+				
+	}
 
 }

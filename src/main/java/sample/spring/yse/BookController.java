@@ -43,4 +43,28 @@ public ModelAndView createPost(@RequestParam Map<String,Object> map) {
 	
 	return mav;
 	}
+@RequestMapping(value="/update",  method=RequestMethod.GET)
+public ModelAndView update(@RequestParam Map<String, Object> map) {
+	Map<String, Object> detailMap = this.bookService.detail(map);
+	
+	ModelAndView mav = new ModelAndView();
+	mav.addObject("data", detailMap);
+	mav.setViewName("/book/update");
+	
+	return mav;
+	}
+
+@RequestMapping(value="update", method=RequestMethod.POST)
+public ModelAndView updatePost(@RequestParam Map<String, Object> map) {
+	ModelAndView mav = new ModelAndView();
+	
+	boolean inUpdateSuccess = this.bookService.edit(map);
+	if(inUpdateSuccess) {
+		String bookId = map.get("bookId").toString();
+		mav.setViewName("redirext:/detail?bookId="+ bookId);	
+	}else {
+		mav = this.update(map);
+	}
+	return mav;
+}
 }
