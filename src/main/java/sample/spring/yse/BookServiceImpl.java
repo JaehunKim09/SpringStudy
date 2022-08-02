@@ -40,7 +40,7 @@ public String create(Map<String, Object> map) {
 	}
 	
 	@Override
-	public List<Map<String, Object>> list(Map<String, Object> map){
+	public List<Map<String, Object>> list(Map<String, Object> map) {
 		return this.bookDao.selectList(map);
 	}
 

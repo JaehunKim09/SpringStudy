@@ -85,11 +85,16 @@ public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
 @RequestMapping(value="list")
 public ModelAndView list(@RequestParam Map<String, Object> map) {
 	
-	List<Map<String, Object>> list = this.bookService.list(map);;
+	List<Map<String, Object>> list = this.bookService.list(map);
 	
 	ModelAndView mav = new ModelAndView();
 	mav.addObject("data", list);
+	
+	if(map.containsKey("keyword")) {
+		mav.addObject("keyword", map.get("keyword"));
+	}
+	
 	mav.setViewName("/book/list");
 	return mav;
-}
+	}
 }
